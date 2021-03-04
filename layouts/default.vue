@@ -14,6 +14,7 @@
           v-for="(item, i) in items"
           :key="i"
           :to="item.to"
+          :target="item.external"
           router
           exact
         >
@@ -105,11 +106,17 @@ export default {
           title: 'Dashboard',
           to: '/'
         },
+        // {
+        //   icon: 'mdi-chart-bubble',
+        //   title: 'Report',
+        //   to: '/report'
+        // },
+
         {
           icon: 'mdi-chart-bubble',
-          title: 'Report',
-          to: '/report'
-        },
+          title: 'Super Admin',
+          to: '/super_admin',
+         },
        
          {
           icon: 'mdi-chart-bubble',
@@ -121,17 +128,11 @@ export default {
           title: 'User',
           to: '/User'
         },
-
-        // {
-        //   icon: 'mdi-chart-bubble',
-        //   title: 'User',
-        //   to: '/User'
-        // },
-        {
+         {
           icon: 'mdi-chart-bubble',
-          title: 'Project Admin',
-          to: '/project_admin'
-         },
+          title: 'Security User',
+          to: '/security_guard'
+        },
 
         {
           icon: 'mdi-chart-bubble',
@@ -147,7 +148,20 @@ export default {
           icon: 'mdi-chart-bubble',
           title: 'Allocation',
           to: '/allocations'
-        },       
+        },
+        {
+          icon: 'mdi-chart-bubble',
+          title: 'HSE',
+          to: '/reports/hse',
+          external : '_blank',
+        }
+        ,
+        {
+          icon: 'mdi-chart-bubble',
+          title: 'Securtiy',
+          to: '/reports/security',
+          external : '_blank',
+        }       
         
       ],
       miniVariant: false,

@@ -40,14 +40,8 @@
               <v-container>
                 <v-row>
                    
-                   
 
-                  <!-- <v-col cols="6" sm="6" md="12">
-                    <v-autocomplete :items="admins" v-model="editedItem.admin" item-text="name"  item-value="id"  label="Project Admin"></v-autocomplete>
-                  <div style="color:red;" v-if="errors.name">{{errors.name[0]}}</div>
-                  </v-col> -->
-
-                   <v-col cols="6" sm="6" md="12">
+                  <v-col cols="6" sm="6" md="12">
                     <v-text-field v-model="editedItem.name" :label="`${entity} Name`"></v-text-field>
                     <div style="color:red;" v-if="errors.name">{{errors.name[0]}}</div>
                   </v-col>
@@ -145,7 +139,7 @@
   export default {
     data: () => ({
 
-      entity : 'Client',  
+      entity : 'Security Guard User',  
       dialog: false,
       isActive: true,
       search:'',
@@ -161,9 +155,9 @@
           value: 'email',
         },
         // {
-        //   text: 'Project Admin',
+        //   text: 'Mobile No',
         //   sortable: false,
-        //   value: 'admin.name',
+        //   value: 'mobile_no',
         // },
         {
           text: 'Active',
@@ -174,11 +168,9 @@
 
       ],
       data: [],
-      admins : [],
       editedIndex: -1,
       editedItem: {
-      admin : '',
-      role_id: 6,
+      role_id: 7,
       name: "",
       email: "",
       password: "",
@@ -186,8 +178,7 @@
       mobile_no: "",
       },
       defaultItem: {
-      admin : '',
-      role_id: 6,
+      role_id: 7,
       department_id : "",
       name: "",
       email: "",
@@ -201,10 +192,6 @@
       Rules : [
           v => !!v || 'This field is required',
         ],
-      ProjectAdminRules : [
-        v => !!v || 'This field is required',
-      ],
-        
 
     }),
 
@@ -221,8 +208,7 @@
     },
 
     created () {
-      this.initialize();
-      this.getProjectAdmins();
+      this.initialize()
     },
 
     methods: {
@@ -231,15 +217,9 @@
       this.$axios.get(`get_users_by_id/${this.editedItem.role_id}`)
         .then(res => {
           this.data = res.data.data;
-          console.log(res.data.data);
          });
-      },
-      getProjectAdmins () {
 
-      this.$axios.get(`get_users_by_id/${1}`)
-        .then(res => {
-          this.admins = res.data.data;
-         });
+      
       },
 
       editItem (item) {
@@ -289,7 +269,7 @@
               role_id : this.editedItem.role_id,
               name : this.editedItem.name,
               email : this.editedItem.email,
-              admin : this.editedItem.admin,
+            //   mobile_no : this.editedItem.mobile_no,
               cnic : this.editedItem.cnic,
               isActive : this.isActive ? 1 : 0,
           };
