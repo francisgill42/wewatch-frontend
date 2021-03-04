@@ -130,7 +130,7 @@ export default {
         },
          {
           icon: 'mdi-chart-bubble',
-          title: 'Security User',
+          title: 'Security Guards',
           to: '/security_guard'
         },
 

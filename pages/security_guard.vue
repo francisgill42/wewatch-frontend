@@ -139,7 +139,7 @@
   export default {
     data: () => ({
 
-      entity : 'Security Guard User',  
+      entity : 'Security Guards',  
       dialog: false,
       isActive: true,
       search:'',
