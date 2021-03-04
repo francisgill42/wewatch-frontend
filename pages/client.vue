@@ -42,10 +42,10 @@
                    
                    
 
-                  <!-- <v-col cols="6" sm="6" md="12">
+                  <v-col cols="6" sm="6" md="12">
                     <v-autocomplete :items="admins" v-model="editedItem.admin" item-text="name"  item-value="id"  label="Project Admin"></v-autocomplete>
                   <div style="color:red;" v-if="errors.name">{{errors.name[0]}}</div>
-                  </v-col> -->
+                  </v-col>
 
                    <v-col cols="6" sm="6" md="12">
                     <v-text-field v-model="editedItem.name" :label="`${entity} Name`"></v-text-field>
@@ -160,11 +160,11 @@
           sortable: false,
           value: 'email',
         },
-        // {
-        //   text: 'Project Admin',
-        //   sortable: false,
-        //   value: 'admin.name',
-        // },
+        {
+          text: 'Project Admin',
+          sortable: false,
+          value: 'admin.name',
+        },
         {
           text: 'Active',
           sortable: true,
@@ -236,7 +236,7 @@
       },
       getProjectAdmins () {
 
-      this.$axios.get(`get_users_by_id/${1}`)
+      this.$axios.get(`get_users_by_id/${2}`)
         .then(res => {
           this.admins = res.data.data;
          });

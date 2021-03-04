@@ -114,8 +114,8 @@ export default {
 
         {
           icon: 'mdi-chart-bubble',
-          title: 'Super Admin',
-          to: '/super_admin',
+          title: 'Project Admin',
+          to: '/project_admin',
          },
        
          {
