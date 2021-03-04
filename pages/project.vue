@@ -180,7 +180,7 @@
             
           </v-card-actions>
 
-          <template v-if="editedIndex > -1">
+          <template v-if="action == 'Edit'">
 
             <v-divider></v-divider>
 
