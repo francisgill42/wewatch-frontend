@@ -2,6 +2,31 @@
   <v-container>
     
     <v-row>
+                    <div class="text-center">
+
+              <v-snackbar
+              color="primary"
+              v-model="snackbar"
+              :timeout="timeout"
+              :top="top"
+              >
+             <b> {{ msg }} </b>
+
+              <template v-slot:action="{ attrs }">
+              <v-btn
+              text
+              x-small
+              class="secondary"
+              v-bind="attrs"
+              @click="snackbar = false"
+              fab
+              >
+              x
+              </v-btn>
+              </template>
+              </v-snackbar>
+              </div>
+
         <v-col cols="12">
         <v-card class="pa-2">
         <v-col
@@ -74,6 +99,10 @@
   export default {
     data () {
       return {
+        top : true,
+        snackbar: false,
+        timeout: 2000,
+        msg : '',
         check_all_user_ids : false,
         check_all_manager_ids : false,
       
@@ -139,11 +168,11 @@
                     this.msg = '';
 
                     if(res.data.success){
-                      this.msg = 'record has been inserted';
+                      this.msg = 'record has been updated';
                       this.data.unshift(res.data.data); 
                     }
                     else{
-                      this.msg = 'record cannot insert';
+                      this.msg = 'record cannot update';
                     }
 
                     this.snackbar = true;
