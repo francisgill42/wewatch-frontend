@@ -1,6 +1,7 @@
 <template>
 <div>
     <v-row>
+
       <!-- <v-col cols="12" sm="8" md="4" >
       <v-card class="pa-5">
       <Chart />
@@ -15,7 +16,7 @@
       <v-card class="pa-5">
       </v-card>
        </v-col> -->
-          <v-col  cols="12" sm="8" md="4" v-for="(card,i) in cards" :key="i">
+          <v-col  cols="12" sm="8" md="4" class="" v-for="(card,i) in cards" :key="i">
             <v-card :class="card.color" class="pa-2">
             <v-list-item dark>
             <v-list-item-content>
@@ -42,26 +43,16 @@
   <v-row>
   
   <v-col cols="6">
-      <client-only>
-        <DoughnutChart :data="data" :height="200" />
-      </client-only>
+        <DoughnutChart v-if="loaded" :data="data" :options="options" :height="200" />
   </v-col>
-    <v-col cols="6">
-        <client-only>
-        <LineChart :data="data" :height="200" />
-      </client-only>
-
-  </v-col>
-    <v-col cols="6">
-        <client-only>
-          <PieChart :data="data" :height="200" />
-      </client-only>
-        </v-col>
   <v-col cols="6">
-        <client-only>
-          <BarChart :data="data" :height="200" />      
-        </client-only>
-
+        <LineChart v-if="loaded" :data="data" :options="options"  :height="200" />
+  </v-col>
+  <v-col cols="6">
+        <PieChart v-if="loaded" :data="data" :options="options"  :height="200" />
+  </v-col>  
+  <v-col cols="6">
+        <BarChart v-if="loaded" :data="data" :options="options"  :height="200" />
   </v-col>
 </v-row>
 
@@ -69,78 +60,58 @@
 </template>
 
 <script>
-// import Chart from '~/components/Chart.vue'
-// import PieChart from '~/components/PieChart.vue'
-
 export default {
 
-  components: {
-    // Chart,
-    // PieChart
-  },
   methods : {
     added_zero(v) { return v < 10 ? '0' + v : v }
   },
  data : () => ({
-   cards : [
-    {text:'Accident Incident Report',count:9,icon:'mdi-home',color:'primary'},
-    {text:'Covid-19 Register',count:15,icon:'mdi-home',color:'blue'},
-    {text:'Daily Security Report',count:23,icon:'mdi-home',color:'info lighten-1'},
-    {text:'Daily HSE Report',count:559,icon:'mdi-home',color:'orange darken-4 '},
-    {text:'Daily Site Visiter Register',count:199,icon:'mdi-home',color:'brown darken-1'},
-    {text:'Daily Site Visiter Register',count:199,icon:'mdi-home',color:'brown darken-1'},
-    {text:'Daily Site Visiter Register',count:199,icon:'mdi-home',color:'brown darken-1'},
-    {text:'Lost Work Hours',count:523,icon:'mdi-home',color:'brown lighten-1'},
-    {text:'Daily Man Hours',count:125,icon:'mdi-home',color:'orange lighten-1 '},
-
-   ],
-   second_cards : [
-      // {text:'Daily Man Hours',count:125,icon:'mdi-home',color:'orange lighten-1 '},
-      // {text:'Daily Site Visiter Register',count:199,icon:'mdi-home',color:'brown darken-1'},
-      // {text:'Lost Work Hours',count:523,icon:'mdi-home',color:'brown lighten-1'},
-   ],
+    loaded : false,
+    arr : [],
+    cards : [],
+    value: [],
     data: {
         labels: [],
           
         datasets: [
           {
-            label: 'checking',
             backgroundColor: [],
             data: [],
-           
-          }
-        ]
+          },          
+        ],
       },
+      options : {
+            showLines: false,
+          }
  }),
-   mounted(){
-    var arr = [
-       {text:'Accident Incident Report',count:9},
-        {text:'Covid-19 Register',count:15},
-        {text:'Daily Security Report',count:23},
-        {text:'Daily HSE Report',count:559},
-        {text:'Daily Man Hours',count:125},
-        {text:'Daily Site Visiter Register',count:199},
-        {text:'Lost Work Hours',count:523},
-    ];
+   async mounted () {
+    this.loaded = false
+    try {
+      await this.$axios.get('all')
+      .then(res => {
+        
+        this.cards = [
+                    {text:'Accident Incident Report',count:res.data.GetAccidentIncidentCount,color:'primary',chartColor : 'rgb(45 87 163)'},
+                    {text:'Covid-19 Report',count:res.data.GetCovidCount,color:'red',chartColor : 'rgb(244 67 54)'},
+                    {text:'Daily Security Report',count:res.data.GetDailySecurityReportCount,color:'info lighten-1',chartColor : 'rgb(75 194 181)'},
+                    {text:'Daily HSE Report',count:res.data.GetDailyHSEReportCount,color:'orange darken-4', chartColor : 'rgb(230 81 0)'},
+                    {text:'Daily Site Visiter Report',count:res.data.GetSiteVisiterRecordCount,color:'brown darken-1',chartColor : 'rgb(109 76 65)'},
+                    {text:'Training Induction Report',count:res.data.GetTrainingInductionCount,color:'purple',chartColor : 'rgb(156 39 176)'},
+                    {text:'Observation Report',count:res.data.GetObservationCount,color:'green',chartColor : 'rgb(76 175 80)'},
+                    {text:'Daily Man Hours',count:res.data.GetDailyManHoursCount,color:'orange lighten-1',chartColor : 'rgb(255 167 38)'},
+                    {text:'Lost Work Hours',count:res.data.GetLostWorkHoursCount,color:'brown lighten-1',chartColor : 'rgb(141 110 99)'},
 
+        ];
+        this.data.labels = this.cards.flatMap((v) => v.text)
+        this.data.datasets[0].label = 'Reports'
+        this.data.datasets[0].data = this.cards.flatMap((v) => v.count)
+        this.data.datasets[0].backgroundColor = this.cards.flatMap((v) => v.chartColor)
+      });
 
-    this.data.labels = arr.flatMap((v) => v.text)
-    this.data.datasets[0].data = arr.flatMap((v) => v.count)
-    
-    // this.data.datasets[0].label = 'francis'
-    this.data.datasets[0].backgroundColor = [
-            'rgb(54, 162, 235)',
-            'rgb(255, 99, 132)',
-            'rgb(75, 192, 192)',
-            'rgb(255, 159, 64)',
-            'rgb(201, 203, 207)',
-            'rgb(153, 102, 255)',
-            'rgb(255, 205, 86)'
-    ]
-    
-  },
-
-
- 
+      this.loaded = true
+    } catch (e) {
+      console.error(e)
+    }
+  }
 }
 </script>
