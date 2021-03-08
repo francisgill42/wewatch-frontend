@@ -1,9 +1,8 @@
 <template>
   <div>
+    <v-container>
 
-    <v-container class="container">
- 
-<v-row>
+        <v-row>
 
   <v-col
     cols="2"
@@ -13,7 +12,7 @@
    <v-col
     cols="8"
   >
-    <v-img class="watermark" src="/watermark.png"></v-img>
+    <v-img class="watermark" src="watermark.png"></v-img>
  
      </v-col>  
 
@@ -24,28 +23,23 @@
    
  </v-row>
 
-
-<v-row
-    >
-
-  
+<v-row>
       <v-col
-        cols="6" 
-      >
-      <v-img class="logo" src="https://wewatch.ae/wp-content/uploads/2020/03/logo-web.png"></v-img>
-        <v-img class="logo2" src="logo2.png"></v-img>
-      </v-col>
+        cols="6">
+      <v-img class="logo" src="logo.png"></v-img>
 
+      </v-col>
 
       <v-col
         cols="6"
-      >
+     >
 
       <v-row>
   
       <v-col  
         cols="4"
       >
+      
        <v-img class="logo_iso" src="https://wewatch.ae/wp-content/uploads/2021/02/BV_Cert_-ISO_31000.jpg"></v-img>
       </v-col> 
 
@@ -80,7 +74,7 @@
         style="min-width: 100px;"
         class="flex-grow-0 flex-shrink-1"
         >
-      <h2 class="top_h">Daily HSE Report</h2><br>
+      <h2 class="top_h">Daily Security Report</h2><br>
       <p class="top_h_left" style="color:red">EVENT/PROJECT NAME  </p>
       <p class="top_h_left">KINGDOM OF SAUDI ARABIA</p>
       <p class="top_h_left">02 FEBRUARY 2021 </p>
@@ -122,7 +116,7 @@
         class="flex-grow-0 flex-shrink-1"
         >
 
-      <h2 class="">1.	Daily Situation Summary <span style="color:red"> (Combined QHSSE) (both) </span> </h2>
+      <h2 class="">1.	Daily Situation Summary <span style="color:red"> (Combined QHSSE)  </span> </h2>
       <p class=""> 1.1	Head of Security arrived in Al Qaisumah in the last 24hrs, however Operations Manager requested he return to Riyadh at short notice to support a potential Ministry of Health visit, all passed with no concerns. After speaking with the client relations senior manager, security guards were observed conducting their role of access control. Follow up meeting with Flow Solutions Project Manager (Mahmoud El Sheikh), he was successful in receiving some electrical components for the generators located at KASC. He is also expecting the full delivery of the missing fire extinguishers and spill kits tomorrow, he was also reminded to change the few fire extinguishers that were showing out of date inspections. He is still on track for a more detailed inspection on the 28 Dec 2020 by the Head of Security.  The Project Manager (Mahmoud El Sheikh) remains extremely proactive and eager to fulfil his supplier deliverables.</p>
       <p class="">1.2	Head of Security to conduct another safety inspection on the 28 Dec 2020 with Flow Solutions prior to operational phase. Flow Solutions are only responsible for the Start/Finish location and not any of the bivouac sites.  </p>
 
@@ -139,7 +133,7 @@
         class="flex-grow-0 flex-shrink-1"
         >
 
-      <h2 class="">2.	Event / Project Details  <span style="color:red"> (both) </span> </h2>
+      <h2 class="">2.	Event / Project Details  <span style="color:red">  </span> </h2>
        </v-col>
         </v-row>  
 
@@ -319,7 +313,7 @@
         class="flex-grow-0 flex-shrink-1"
         >
 <br>
-      <h2 class="">3.	Event / Project Key Meetings and Action Points <span style="color:red"> (both) </span> </h2>
+      <h2 class="">3.	Event / Project Key Meetings and Action Points <span style="color:red"> </span> </h2>
       <p class="">3.1	Nothing to report.</p>
       
       <p class="" style="color:red;">Confidential </p>
@@ -333,81 +327,6 @@
 <br>
 
 
-<v-row>
-
-       <v-col
-        cols="12"
-        style="min-width: 100px;"
-        class="flex-grow-0 flex-shrink-1"
-        >
-
-      <h2 class="">4.	Design/Build Activities in Progress   <span style="color:red"> (List the activities) (HSE) </span> </h2>
-       </v-col>
-        </v-row>  
-
-
-  <v-simple-table>
-    <template v-slot:default>
-      <thead>
-        <tr>
-          <th class="text-left">
-           Occurrence
-          </th>
-          <th class="text-left">
-            Yes or No
-          </th>
-           <th class="text-left">
-            Remarks 
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Scaffolding Construction</td>
-          <td></td>
-           <td></td>
-        </tr>
-          <tr>
-          <td>Electrical Works</td>
-          <td></td>
-           <td></td>
-        </tr>
-          <tr>
-          <td>Heavy Crane Lifting Operations</td>
-          <td></td>
-           <td></td>
-        </tr>
-          <tr>
-          <td>Working from Height </td>
-          <td></td>
-           <td></td>
-        </tr>
-          <tr>
-          <td>Painting / Spraying / Preparation</td>
-          <td></td>
-           <td></td>
-        </tr>
-          <tr>
-          <td>Groundworks - Compacting / Grading</td>
-          <td></td>
-           <td></td>
-        </tr>
-          <tr>
-          <td>Work Permit Compliance (Hot Works/Confined Spaces</td>
-          <td></td>
-           <td></td>
-        </tr>
-          <tr>
-          <td>Waste Management</td>
-          <td></td>
-           <td></td>
-        </tr>
-      </tbody>
-    </template>
-  </v-simple-table>
-
-<br>
-
    <v-row>
 
        <v-col
@@ -416,122 +335,21 @@
         class="flex-grow-0 flex-shrink-1"
         >
 
-      <h2 class="">5.	Toolbox Talk / HSE / Security Inductions  <span style="color:red"> (both) </span> </h2>
-      <p class=""> 5.1	Nothing to Report</p>
+      <h2 class="">4.	Toolbox Talk / HSE / Security Inductions  <span style="color:red"> </span> </h2>
+      <p class=""> 4.1	Nothing to Report</p>
        <p class="" style="color:red"> 5.2	If Toolbox talk or on-site induction training was conducted, please use correct forms and acquire signatures for all attendees and name of person delivering talk or training.</p>
     
        </v-col>
 
       </v-row>  
 
-      <v-row>
-        <v-col>
-      <h2 class="">6.	Event/Project Health, Safety and Environmental Compliance   <span style="color:red"> (HSE) </span> </h2>
-       </v-col>
-        </v-row>  
 
-
-    <v-simple-table>
-    <template v-slot:default>
-      <thead>
-        <tr>
-          <th class="text-left">
-           Occurrence
-          </th>
-          <th class="text-left">
-            Yes or No
-          </th>
-           <th class="text-left">
-            Remarks 
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Any safety non-compliance violations</td>
-          <td></td>
-           <td></td>
-        </tr>
-          <tr>
-          <td>Any Incidents Requiring First Aid</td>
-          <td></td>
-           <td></td>
-        </tr>
-          <tr>
-          <td>Any Environmental Incidents (Spills)</td>
-          <td></td>
-           <td></td>
-        </tr>
-          <tr>
-          <td>Project Daily Housekeeping Completed</td>
-          <td></td>
-           <td></td>
-        </tr>
-          <tr>
-          <td>Work Permit Compliance (Hot Works/Confined Spaces)</td>
-          <td></td>
-           <td></td>
-        </tr>
-          <tr>
-          <td>Fuels/Lubricants/Compressed Cylinders Stored Correctly</td>
-          <td></td>
-           <td></td>
-        </tr>
-          <tr>
-          <td>Any additional Health, Safety, Environment Concerns</td>
-          <td></td>
-           <td></td>
-        </tr>
-       
-      </tbody>
-    </template>
-  </v-simple-table>
-
-<br>
-
- <v-row>
-        <v-col>
-      <h2 class="">7.	New Hazard Identified  <span style="color:red"> (HSE) </span> </h2>
-       </v-col>
-        </v-row>  
-
-
-    <v-simple-table>
-    <template v-slot:default>
-      <thead>
-        <tr>
-          <th class="text-left">
-           Add to Event / Project Risk Assessment
-          </th>
-          <th class="text-left">
-            Yes or No
-          </th>
-           <th class="text-left">
-            Corrective Actions
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Trailing wires from handheld electrical tools</td>
-          <td>YES</td>
-           <td>Additional sockets fitted to reduce trailing wires and extension leads.</td>
-        </tr>
-          <tr>
-          <td>Grinding metal works with safety guards fitted.</td>
-          <td>YES</td>
-           <td>Work stopped until guards are fitted to hand tools.</td>
-        </tr>
-          
-      </tbody>
-    </template>
-  </v-simple-table>
 
   <br>
 
  <v-row>
         <v-col>
-      <h2 class="">8.	Incident / Accident or Near Miss Reporting  <span style="color:red"> (both) </span> </h2>
+      <h2 class="">5.	Incident / Accident or Near Miss Reporting  <span style="color:red"> </span> </h2>
        </v-col>
         </v-row>  
 
@@ -574,50 +392,56 @@
   </v-simple-table>
 
 
-  <br>
+<br>
 
- <v-row>
-        <v-col>
-      <h2 class="">9.	COVID-19 Mitigation Compliance  <span style="color:red"> (HSE) </span> </h2>
+     <v-row>
+
+       <v-col
+        cols="12"
+        style="min-width: 100px;"
+        class="flex-grow-0 flex-shrink-1"
+        >
+
+      <h2 class="">6.	Security Management Plan and Sub-Contractor Security  <span style="color:red"> (Sec)</span> </h2>
+      <p class="">6.1	No immediate changes to the current security plan.  Weekly review to be conducted in the next 48hr period, all changes will be added to the revised plan and reported in the daily safety and security report, no immediate concerns. Two sub-contractor guards dismissed for security violations, both were replaced by the sub-contractor management within a 2-hr period, no further concerns.</p>
+      
        </v-col>
-        </v-row>  
 
+      </v-row>  
 
-    <v-simple-table>
-    <template v-slot:default>
-      <thead>
-        <tr>
-          <th class="text-left">
-           Occurrence
-          </th>
-          <th class="text-left">
-            Yes or No
-          </th>
-           <th class="text-left">
-            Remarks
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Face Mask Compliance</td>
-          <td>YES</td>
-           <td></td>
-        </tr>
-         <tr>
-          <td>Social Distancing Compliance</td>
-          <td>YES</td>
-           <td></td>
-        </tr>
-          <tr>
-          <td>Hand Sanitation Compliance</td>
-          <td>NO</td>
-           <td>Washrooms require hand sanitiser stations to placed outside.</td>
-        </tr>
-      </tbody>
-    </template>
-  </v-simple-table>
+    <br>
 
+     <v-row>
+
+       <v-col
+        cols="12"
+        style="min-width: 100px;"
+        class="flex-grow-0 flex-shrink-1"
+        >
+
+      <h2 class="">7.	Country Travel Security 	<span style="color:red"> (Sec) </span> </h2>
+      <p class="">7.1	Authorities are requiring all non-Saudis, except for children aged eight and under, to present a negative coronavirus disease (COVID-19) test to travel to Saudi Arabia as of Jan. 5.</p>
+      
+       </v-col>
+
+      </v-row>     
+
+       <br>
+
+     <v-row>
+
+       <v-col
+        cols="12"
+        style="min-width: 100px;"
+        class="flex-grow-0 flex-shrink-1"
+        >
+
+      <h2 class="">8.	Country Significant Acts of Terrorism/Crime (SIGACTS)	<span style="color:red"> (Sec) </span> </h2>
+      <p class="">8.1	The last reported SIGACT occurred on the 16 December 2020 – Saudi authorities confirmed an unspecified Al-Houthi projectile landed close to a village along the Saudi-Yemeni border. The incident resulted in no casualties or material damage. Saudi authorities have attributed the attack to Yemen's Al-Houthi rebels. Local authorities will likely maintain increased security until it becomes clear that no further launches are imminent. Many of these missiles, rockets, and UAVs have been intercepted by Saudi air defences, but a number of civilians have been killed and injured in such attacks since the beginning of the conflict.</p>
+      
+       </v-col>
+
+      </v-row>     
 
          <br>
 
@@ -629,8 +453,8 @@
         class="flex-grow-0 flex-shrink-1"
         >
 
-      <h2 class="">10.	Procurement Request 	<span style="color:red"> (Operational HSE or Security Equipment Requirement) (Both) </span> </h2>
-      <p class="">10.1	Nothing to report.</p>
+      <h2 class="">9.	Procurement Request 	<span style="color:red"> (Operational HSE or Security Equipment Requirement)</span> </h2>
+      <p class="">9.1	Nothing to report.</p>
       
        </v-col>
 
@@ -646,8 +470,8 @@
         class="flex-grow-0 flex-shrink-1"
         >
 
-      <h2 class="">11.	Red Flag 	<span style="color:red"> (Both) </span> </h2>
-      <p class="">11.1	Nothing to report. </p>
+      <h2 class="">10.	Red Flag 	<span style="color:red"> </span> </h2>
+      <p class="">10.1	Nothing to report. </p>
       
        </v-col>
 
@@ -672,7 +496,6 @@ export default {
 
 <style scoped>
 
-
 .watermark
 {
   position:absolute;
@@ -687,12 +510,6 @@ export default {
   /* margin-top:7px; */
 }
 
-.logo2
-{
-  width: 200px;
-  margin-top:7px;
-  margin-left:93px;
-}
 
 .top_h
 {

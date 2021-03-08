@@ -14,7 +14,7 @@
           v-for="(item, i) in items"
           :key="i"
           :to="item.to"
-          :target="item.external"
+
           router
           exact
         >
@@ -152,15 +152,15 @@ export default {
         {
           icon: 'mdi-chart-bubble',
           title: 'HSE',
-          to: '/reports/hse',
-          external : '_blank',
+          to: '/hse',
+          external : '',
         }
         ,
         {
           icon: 'mdi-chart-bubble',
           title: 'Securtiy',
-          to: '/reports/security',
-          external : '_blank',
+          to: '/security',
+          external : '',
         }       
         
       ],
