@@ -1,4 +1,6 @@
-const data = (ctx) => {     
+const data = (ctx) => {  
+    
+    if(ctx.store.$auth.user && ctx.store.$auth.user.user_type){
 
     let user_type = ctx.store.$auth.user.user_type;
 
@@ -19,6 +21,8 @@ const data = (ctx) => {
 
     let check = restricted.some(e => e != path);
     if(check && path != '/')  ctx.redirect('/')
+
+}
 
 }
 
