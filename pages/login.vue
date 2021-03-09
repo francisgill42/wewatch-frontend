@@ -1,9 +1,9 @@
 <template>
 <v-app id="login" class="primary">
-<v-snackbar v-model="snackbar" :top="'top'">
+<v-snackbar color="secondary" v-model="snackbar" :top="'top'">
 {{msg}}
-<v-btn text @click="snackbar = false">
-Close
+<v-btn class="error" fab x-small text @click="snackbar = false">
+X
 </v-btn>
 </v-snackbar>
 <v-main>

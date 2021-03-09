@@ -6,7 +6,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - wewatch',
+    titleTemplate: 'wewatch',
     title: 'wewatch',
     htmlAttrs: {
       lang: 'en'
@@ -71,7 +71,7 @@ export default {
     }
   },
   router: {
-    middleware: ['auth']
+    middleware: ['auth','acl']
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify

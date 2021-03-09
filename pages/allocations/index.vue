@@ -28,16 +28,22 @@
               </v-snackbar>
               </div>
         <v-col cols="12" md="6">
-        <v-toolbar dense flat class="primary" dark><b>Allocate Users and Managers to the Project</b>
+        <v-toolbar dense flat class="primary" dark><b>Allocate for the Project</b>
           <v-spacer></v-spacer>
           <v-btn class="secondary" small @click="submit">Allocate Users</v-btn>
          </v-toolbar>
           <v-card class="pa-2">
+        <v-form
+        ref="form"
+        lazy-validation
+        >
         <v-col
         cols="12"
         sm="12"
         >
+        
         <v-select
+        :rules="[v => !!v || 'This field is required']"
         v-model="project_id"
         :items="projects"
         item-value="id"
@@ -49,7 +55,7 @@
         
 
         <v-row>
-        <v-col cols="12" class="pa-5" md="6" sm="12">
+        <v-col cols="12" class="pa-5" md="4" sm="12">
         Managers
         <v-checkbox 
         @change="for_manager_ids"
@@ -57,15 +63,16 @@
         label="Select All"
         ></v-checkbox>
 
-         <v-checkbox v-for="(item,i) in managers" :key="i"
+        <v-checkbox v-for="(item,i) in managers" :key="i"
         v-model="manager_ids"
         :label="item.name"
         :value="item.id"
+        :rules="GeneralRules"
         ></v-checkbox>
 
         </v-col>
 
-        <v-col cols="12" class="pa-5" md="6" sm="12">
+        <v-col cols="12" class="pa-5" md="4" sm="12">
         Users
         <v-checkbox 
         @change="for_user_ids" 
@@ -77,6 +84,24 @@
         v-model="user_ids"
         :label="item.name"
         :value="item.id"
+        :rules="GeneralRules"
+        ></v-checkbox>
+
+        </v-col>
+
+                <v-col cols="12" class="pa-5" md="4" sm="12">
+        Guards
+        <v-checkbox 
+        @change="for_guard_ids" 
+        v-model="check_all_guard_ids" 
+        label="Select All"
+        ></v-checkbox>
+
+        <v-checkbox v-for="(item,i) in guards" :key="i"
+        v-model="guard_ids"
+        :label="item.name"
+        :value="item.id"
+        :rules="GeneralRules"
         ></v-checkbox>
 
         </v-col>
@@ -87,6 +112,7 @@
         sm="12"
         >
         </v-col>
+            </v-form>
         </v-card>
 
         </v-col>
@@ -153,8 +179,6 @@
 
         </v-col> -->
 
-
-
         </v-row>     
    
     </v-row>
@@ -166,11 +190,13 @@
   export default {
     data () {
       return {
+      
         top : true,
         snackbar: false,
         timeout: 2000,
         check_all_user_ids : false,
         check_all_manager_ids : false,
+        check_all_guard_ids : false,
         headers: [
         {
           text: '#',
@@ -206,23 +232,24 @@
     
       ],  
         search:'',
-        project_id: Number,
+        project_id: '',
+        guard_ids : [], 
         user_ids : [],
         manager_ids : [],
         data : [],
         projects : [],
+        guards : [],
         users : [],
         managers : [],
-
+        GeneralRules : [
+           v => this.guard_ids.length || this.manager_ids.length || this.user_ids.length ? !!v : 'This field is required'
+        ],
         msg : '',
         check:false,
 
       }
     },
-    computed:{
-      
-    },
-  
+
     created (){
         this.$axios.get('/allocation')
             .then((res) => {
@@ -232,6 +259,11 @@
             .then((res) => {
                 this.projects = res.data;
             });
+            this.$axios.get(`get_users_by_id/${7}`)
+            .then(res => {
+            this.guards = res.data.data;
+            });
+
             this.$axios.get(`get_users_by_id/${5}`)
             .then(res => {
             this.users = res.data.data;
@@ -244,6 +276,12 @@
 
     },
     methods:{
+
+      validate () {
+        if(this.$refs.form.validate()){
+          alert();
+        }
+      },
 
         editItem (item) {
           this.$router.push('/allocations/' + item.id);
@@ -265,8 +303,12 @@
 
         }, 
         
+       
 
-        for_user_ids(){
+        for_guard_ids(){
+          this.guard_ids = this.check_all_guard_ids ? this.guards.map(v => v.id) : [] ;
+        },
+         for_user_ids(){
           this.user_ids = this.check_all_user_ids ? this.users.map(v => v.id) : [] ;
         },
         for_manager_ids(){
@@ -277,8 +319,11 @@
             let payload = {
                 project_id : this.project_id,
                 user_ids :   this.user_ids,
+                guard_ids :   this.guard_ids,
                 manager_ids : this.manager_ids
             };
+
+            if(this.$refs.form.validate()){
 
             this.$axios.post('/allocation',payload)
                 .then((res) =>{
@@ -297,6 +342,7 @@
                   this.snackbar = true;                    
                     
                 });
+                }
         }
     }
   }

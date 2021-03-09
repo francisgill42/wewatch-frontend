@@ -27,6 +27,8 @@
               </v-snackbar>
               </div>
 
+       <v-form ref="form" class="row">       
+
         <v-col cols="12">
         <v-card class="pa-2">
         <v-col
@@ -57,6 +59,7 @@
         v-model="manager_ids"
         :label="item.name"
         :value="item.id"
+        :rules="GeneralRules"
         ></v-checkbox>
 
         </v-col>
@@ -73,6 +76,24 @@
         v-model="user_ids"
         :label="item.name"
         :value="item.id"
+        :rules="GeneralRules"
+        ></v-checkbox>
+
+        </v-col>
+
+         <v-col cols="12" class="pa-5" md="3" sm="12">
+        Guards
+        <v-checkbox 
+        @change="for_guard_ids" 
+        v-model="check_all_guard_ids" 
+        label="Select All"
+        ></v-checkbox>
+
+        <v-checkbox v-for="(item,i) in guards" :key="i"
+        v-model="guard_ids"
+        :label="item.name"
+        :value="item.id"
+        :rules="GeneralRules"
         ></v-checkbox>
 
         </v-col>
@@ -82,11 +103,14 @@
         cols="12"
         sm="12"
         >
-        <v-btn class="secondary" small @click="submit">Allocate Users</v-btn>
+        <v-btn class="secondary" small @click="submit">Allocate</v-btn>
+        <v-btn class="primary" small to="/allocations">Back</v-btn>
         </v-col>
         </v-card>
 
         </v-col>
+
+       </v-form> 
          
     </v-row>
 
@@ -105,14 +129,21 @@
         msg : '',
         check_all_user_ids : false,
         check_all_manager_ids : false,
+        check_all_guard_ids : false,
       
-        project_id: Number,
+        project_id: '',
         user_ids : [],
         manager_ids : [],
+        guard_ids : [],
         data : [],
         projects : [],
         users : [],
         managers : [],
+        guards : [],
+
+        GeneralRules : [
+           v => this.guard_ids.length || this.manager_ids.length || this.user_ids.length ? !!v : 'This field is required'
+        ],
 
       }
     },
@@ -123,6 +154,7 @@
     created (){
         this.$axios.get('/allocation/' + this.$route.params.id)
             .then((res) => {
+              this.guard_ids = res.data.guard_ids;
               this.manager_ids = res.data.manager_ids;
               this.user_ids = res.data.user_ids;
               this.project_id = res.data.project_id;
@@ -133,6 +165,11 @@
             .then((res) => {
                 this.projects = res.data;
             });
+            this.$axios.get(`get_users_by_id/${7}`)
+            .then(res => {
+            this.guards = res.data.data;
+            });
+
             this.$axios.get(`get_users_by_id/${5}`)
             .then(res => {
             this.users = res.data.data;
@@ -146,9 +183,15 @@
     },
     methods:{
 
-        for_user_ids(){
+        for_guard_ids(){
+          this.guard_ids = this.check_all_guard_ids ? this.guards.map(v => v.id) : [] ;
+        },
+
+         for_user_ids(){
           this.user_ids = this.check_all_user_ids ? this.users.map(v => v.id) : [] ;
         },
+
+
         for_manager_ids(){
           this.manager_ids = this.check_all_manager_ids ? this.managers.map(v => v.id) : [] ;
         },
@@ -157,10 +200,12 @@
             let payload = {
                 project_id : this.project_id,
                 user_ids :   this.user_ids,
+                guard_ids : this.guard_ids,
                 manager_ids : this.manager_ids
             };
 
-          
+            if(this.$refs.form.validate()){
+
 
             this.$axios.put('allocation/' + this.$route.params.id, payload)
             .then(res => {
@@ -179,6 +224,8 @@
           
             })
             .catch(err => console.log(err));
+          }        
+
         }
     }
   }

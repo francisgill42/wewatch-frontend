@@ -100,18 +100,21 @@ export default {
       clipped: true,
       drawer: false,
       fixed: false,
-      items: [
-        {
+      items: [],
+      miniVariant: false,
+      right: true,
+      rightDrawer: false,
+      title: 'wewatch.ae'
+    }
+  },
+  created () {
+
+    var AllMenu = [
+      {
           icon: 'mdi-apps',
           title: 'Dashboard',
           to: '/'
         },
-        // {
-        //   icon: 'mdi-chart-bubble',
-        //   title: 'Report',
-        //   to: '/report'
-        // },
-
         {
           icon: 'mdi-chart-bubble',
           title: 'Project Admin',
@@ -126,7 +129,7 @@ export default {
          {
           icon: 'mdi-chart-bubble',
           title: 'User',
-          to: '/User'
+          to: '/user'
         },
          {
           icon: 'mdi-chart-bubble',
@@ -149,26 +152,69 @@ export default {
           title: 'Allocation',
           to: '/allocations'
         },
-        {
-          icon: 'mdi-chart-bubble',
-          title: 'HSE',
-          to: '/hse',
-          external : '',
-        }
-        ,
-        {
-          icon: 'mdi-chart-bubble',
-          title: 'Securtiy',
-          to: '/security',
-          external : '',
-        }       
+        // {
+        //   icon: 'mdi-chart-bubble',
+        //   title: 'HSE',
+        //   to: '/hse',
+        //   external : '',
+        // }
+        // ,
+        // {
+        //   icon: 'mdi-chart-bubble',
+        //   title: 'Securtiy',
+        //   to: '/security',
+        //   external : '',
+        // }  
         
-      ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: 'wewatch.ae'
+          {
+            icon: 'mdi-chart-bubble',
+            title: 'Report',
+            to: '/reports'
+          },
+    ];
+   
+
+    if(this.isSecurityGuard){
+    this.items = [
+        {
+          icon: 'mdi-apps',
+          title: 'Dashboard',
+          to: '/'
+        },
+         {
+          icon: 'mdi-apps',
+          title: 'Inspire',
+          to: '/inspire'
+        },
+    ]    
     }
+    else if(this.isUser){
+      this.items = [
+        {
+          icon: 'mdi-apps',
+          title: 'Dashboard',
+          to: '/'
+        },
+       
+        {
+          icon: 'mdi-apps',
+          title: 'Inspire',
+          to: '/inspire'
+        },
+    ]
+    }
+    else{
+      this.items = AllMenu;
+    }
+
+  },
+  computed : {
+    isSecurityGuard () {
+      return this.$auth.user.user_type == "Security Guard";
+    },
+    isUser () {
+      return this.$auth.user.user_type == "User";
+    },
   },
   methods:{
      logout() {
