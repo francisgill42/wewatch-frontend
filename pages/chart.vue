@@ -28,52 +28,56 @@
 
 <script>
 
-const colors = {
-  red: 'rgb(255, 99, 132)',
-  orange: 'rgb(255, 159, 64)',
-  yellow: 'rgb(255, 205, 86)',
-  green: 'rgb(75, 192, 192)',
-  blue: 'rgb(54, 162, 235)',
-  purple: 'rgb(153, 102, 255)',
-  grey: 'rgb(201, 203, 207)'
-};
-
 export default {
   data() {
     return {
-      comps : ['DoughnutChart'],
+  
+     cards_Arr : [],
+     comps : ['DoughnutChart'],
         
       data: {
-        labels: ['Jan', 'Feb', 'Mar'],
+        labels: [],
+          
         datasets: [
           {
-            label: 'Income',
-            backgroundColor: [colors.red, colors.orange, colors.yellow],
-            data: [10, 15, 20]
+            label: '',
+            backgroundColor: [],
+            data: [],
+           
           }
         ]
       },
-      barChartOptions: {
-        responsive: true,
-        legend: {
-          display: false,
-        },
-        title: {
-          display: true,
-          text: 'Monthly Income'
-        },
-        scales: {
-          yAxes: [
-            {
-              ticks: {
-                beginAtZero: true
-              }
-            }
-          ]
-        }
-      }
+      
     }
   },
+  mounted(){
+    var arr = [
+       {text:'Accident Incident Report',count:9},
+        {text:'Covid-19 Register',count:15},
+        {text:'Daily Security Report',count:23},
+        {text:'Daily HSE Report',count:559},
+        {text:'Daily Man Hours',count:125},
+        {text:'Daily Site Visiter Register',count:199},
+        {text:'Lost Work Hours',count:523},
+    ];
+
+
+    this.data.labels = arr.flatMap((v) => v.text)
+    this.data.datasets[0].data = arr.flatMap((v) => v.count)
+    
+    // this.data.datasets[0].label = 'francis'
+    this.data.datasets[0].backgroundColor = [
+            'rgb(54, 162, 235)',
+            'rgb(255, 99, 132)',
+            'rgb(75, 192, 192)',
+            'rgb(255, 159, 64)',
+            'rgb(201, 203, 207)',
+            'rgb(153, 102, 255)',
+            'rgb(255, 205, 86)'
+    ]
+    
+  },
+
   computed: {
     myStyles () {
       return {
