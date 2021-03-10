@@ -283,7 +283,7 @@
               .then((res) => {
                    
                     if(res.data.success){
-                      this.data.push(res.data.data)
+                      this.data.unshift(res.data.data)
                       this.close()
                       this.errors = []
                       }

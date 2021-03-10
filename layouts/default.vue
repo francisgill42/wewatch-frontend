@@ -22,7 +22,7 @@
             <v-icon >{{ item.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
+            <v-list-item-title v-text="item.text" />
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -62,7 +62,12 @@
     </v-app-bar>
     <v-main>
       <v-container>
-        <nuxt />
+      <v-breadcrumbs :items="items">
+      <template v-slot:divider>
+      <v-icon>mdi-chevron-right</v-icon>
+      </template>
+      </v-breadcrumbs>
+      <nuxt />
       </v-container>
     </v-main>
     <v-navigation-drawer
@@ -97,6 +102,7 @@
 export default {
   data () {
     return {
+      links : [],
       clipped: true,
       drawer: false,
       fixed: false,
@@ -104,71 +110,73 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'wewatch.ae'
+      text:'wewatch.ae'
     }
   },
   created () {
 
+
+
     var AllMenu = [
       {
           icon: 'mdi-apps',
-          title: 'Dashboard',
+          text:'Dashboard',
           to: '/'
         },
         {
           icon: 'mdi-chart-bubble',
-          title: 'Project Admin',
+          text:'Project Admin',
           to: '/project_admin',
          },
        
          {
           icon: 'mdi-chart-bubble',
-          title: 'wewatch Manager',
+          text:'wewatch Manager',
           to: '/wewatchmanager'
         },
          {
           icon: 'mdi-chart-bubble',
-          title: 'User',
+          text:'User',
           to: '/user'
         },
          {
           icon: 'mdi-chart-bubble',
-          title: 'Security Guards',
+          text:'Security Guards',
           to: '/security_guard'
         },
 
         {
           icon: 'mdi-chart-bubble',
-          title: 'Client',
+          text:'Client',
           to: '/client'
         },
         {
           icon: 'mdi-chart-bubble',
-          title: 'Project',
+          text:'Project',
           to: '/project'
         },
         {
           icon: 'mdi-chart-bubble',
-          title: 'Allocation',
+          text:'Allocation',
           to: '/allocations'
         },
         // {
         //   icon: 'mdi-chart-bubble',
-        //   title: 'HSE',
+        //   text:'HSE',
         //   to: '/hse',
         //   external : '',
         // }
         // ,
         // {
         //   icon: 'mdi-chart-bubble',
-        //   title: 'Securtiy',
+        //   text:'Securtiy',
         //   to: '/security',
         //   external : '',
         // }  
         
           {
             icon: 'mdi-chart-bubble',
-            title: 'Report',
+            text:'Report',
             to: '/reports'
           },
     ];
@@ -178,12 +186,12 @@ export default {
     this.items = [
         {
           icon: 'mdi-apps',
-          title: 'Dashboard',
+          text:'Dashboard',
           to: '/'
         },
          {
           icon: 'mdi-apps',
-          title: 'Inspire',
+          text:'Inspire',
           to: '/inspire'
         },
     ]    
@@ -192,13 +200,13 @@ export default {
       this.items = [
         {
           icon: 'mdi-apps',
-          title: 'Dashboard',
+          text:'Dashboard',
           to: '/'
         },
        
         {
           icon: 'mdi-apps',
-          title: 'Inspire',
+          text:'Inspire',
           to: '/inspire'
         },
     ]
