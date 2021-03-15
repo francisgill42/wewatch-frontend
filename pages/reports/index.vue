@@ -26,7 +26,7 @@
                     {text:'Accident Incident Report',count:res.data.GetAccidentIncidentCount,color:'primary',link : '/accidentincident'},
                     {text:'Covid-19 Report',count:res.data.GetCovidCount,color:'red',link : '/covid'},
                     {text:'Daily Security Report',count:res.data.GetDailySecurityReportCount,color:'info lighten-1',link : '/reports/security'},
-                    {text:'Daily HSE Report',count:res.data.GetDailyHSEReportCount,color:'orange darken-4',link : '/reports/hse'},
+                    {text:'Daily HSE Report',count:res.data.GetDailyHSEReportCount,color:'orange darken-4',link : '/hse'},
                     {text:'Daily Site Visiter Report',count:res.data.GetSiteVisiterRecordCount,color:'brown darken-1',link : '/reports/sitevisitor'},
                     {text:'Training Induction Report',count:res.data.GetTrainingInductionCount,color:'purple',link : '/traininginduction'},
                     {text:'Observation Report',count:res.data.GetObservationCount,color:'green',link : '/observation'},

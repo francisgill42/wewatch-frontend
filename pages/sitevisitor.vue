@@ -8,81 +8,12 @@
     <template v-slot:top>
       <v-toolbar flat color="white">
         <v-toolbar-title>{{entity}}</v-toolbar-title>
-        <v-divider
-          class="mx-4"
-          inset
-          vertical
-        ></v-divider>
+      
         <v-text-field   
+          class="mx-4"
         label="Search"
         hide-details v-model="search"></v-text-field>
-         <!-- <v-divider
-          class="mx-4"
-          inset
-          vertical
-        ></v-divider> -->
-        <v-dialog v-model="dialog" max-width="900px">
-          <template v-slot:activator="{ on }">
-            <v-btn small dark class="secondary mb-2" v-on="on">Add {{entity}}</v-btn>
-          </template>
-          <v-card>
-            <v-card-title>
-              <span class="headline">{{ formTitle }} {{entity}}</span>
-               <v-spacer></v-spacer>
-               
-            </v-card-title>
-
-            <v-card-text>
-              <v-container>
-                <v-row>
-                   
-
-                  <!-- <v-col cols="6" sm="6" md="12">
-                    <v-text-field v-model="editedItem.name" :label="`${entity} Name`"></v-text-field>
-                    <div style="color:red;" v-if="errors.name">{{errors.name[0]}}</div>
-                  </v-col> -->
-                 
-                </v-row>
-              </v-container>
-            </v-card-text>
-
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn small class="primary" text @click="close">Cancel</v-btn>
-              <v-btn small class="secondary" text @click="save">Save</v-btn>
-              
-            </v-card-actions>
-
-            <template v-if="editedIndex > -1">
-
-            <v-divider></v-divider>
-
-              
-            <v-card-title>
-              <span class="headline">Password Update</span>
-            </v-card-title>
-
-            <v-card-text>
-              <v-container>
-                 <v-form
-                      ref="change_password_ref"
-                      lazy-validation
-                      >
-                     <v-text-field autocomplete="on" :rules="Rules" type="password" v-model="change_password" label="New Password"></v-text-field>
-                     <v-btn small class="primary" text @click="close">Cancel</v-btn>
-                     <v-btn small class="secondary" text @click="change_password_func">Save</v-btn>
-                
-              
-                    </v-form>
-              </v-container>
-            </v-card-text>
-
-
-            </template>
-
-          </v-card>
-
-        </v-dialog>
+         
       </v-toolbar>
     </template>
     <template v-slot:item.image="{ item }">
@@ -123,38 +54,43 @@
       search:'',
       headers: [
      
+        //  {
+        //   text: 'project',
+        //   sortable: true,
+        //   value: 'project_id',
+        // },
+        // {
+        //   text: 'user',
+        //   sortable: true,
+        //   value: 'user_id',
+        // },
          {
-          text: 'dummy',
+          text: 'company',
           sortable: true,
-          value: 'location',
-        },
-        {
-          text: 'dummy',
-          sortable: true,
-          value: 'reported_date',
-        },
-         {
-          text: 'dummy',
-          sortable: true,
-          value: 'reported_time',
+          value: 'company_name',
         },
 
          {
-          text: 'dummy',
+          text: 'driver',
           sortable: true,
-          value: 'category_incident',
+          value: 'driver_contact',
         },
         
          {
-          text: 'dummy',
+          text: 'visit reason',
           sortable: true,
-          value: 'type_injury',
+          value: 'visit_reason',
         },
-          {
-          text: 'dummy',
-          sortable: true,
-          value: 'type_incident',
-        },
+        //   {
+        //   text: 'car attachment',
+        //   sortable: true,
+        //   value: 'car_attachment',
+        // },
+        //  {
+        //   text: 'id attachment',
+        //   sortable: true,
+        //   value: 'id_attachment',
+        // },
 
        
         { text: 'Action', value: 'actions', sortable: false },
@@ -208,7 +144,10 @@
     methods: {
       initialize () {
 
-      this.$axios.get(`accidentincident`).then(res => this.data = res.data);
+      this.$axios.get(`dailyvisitorsregister`).then(res => {
+        console.log(res.data);
+        console.log(this.data = res.data);
+      });
 
       
       },
@@ -243,40 +182,7 @@
 
     
 
-      save () {
-
-        var payload = {
-                            "user_id": 1,
-                            "project_id": 2,
-                            "location": "Lahore",
-                            "reported_date": "testB",
-                            "reported_time": "testA",
-                            "category_incident": "testB",
-                            "type_injury": "test",
-                            "type_incident": "test",
-                            "other": null,
-                            "fatality": null,
-                            "describe_incident": null,
-                            "immediate_action": null,
-                            "attachment": null,
-
-    };
-       
-          
-              this.$axios.post('accidentincident',payload)
-              .then((res) => {
-                   
-                    if(res.data.success){
-                      this.data.unshift(res.data.data)
-                      this.close()
-                      this.errors = []
-                      }
-                      else{
-                        this.errors = res.data.errors
-                        }
-            })
-            .catch(err => console.log(this.errors = err.response.data.errors));
-        }
+      
      
     },
   }
