@@ -87,8 +87,10 @@
     </template>
     <template v-slot:item.attachment="{ item }">
 
+      <!-- {{item}} -->
 
-        <img height="150px" width="150px"  :src="item.attachment" />
+
+        <img v-if="item && item.attachment" height="150px" width="150px"  :src="item.attachment" />
 
     </template>
 
@@ -124,22 +126,23 @@
       headers: [
 
           {
-          text: '#',
+          text: 'Submitted At',
           sortable: true,
           value: 'created_at',
           },
-     
+    
       {
           text: 'Attachment',
           sortable: true,
           value: 'attachment',
           },
-         {
+                   {
           text: 'Location',
           sortable: true,
           value: 'location',
         },
-        {
+
+         {
           text: 'Report Date',
           sortable: true,
           value: 'reported_date',
@@ -283,9 +286,9 @@
         var payload = {
                             "user_id": 1,
                             "project_id": 1,
-                            "location": "Karachi",
-                            "reported_date": "2021-03-10 14:44:16",
-                            "reported_time": "2021-03-10 14:44:16",
+                            "location": "today",
+                            "reported_date": "2021-03-15",
+                            "reported_time": "15:15",
                             "category_incident": "testB",
                             "type_injury": "test",
                             "type_incident": "test",
@@ -302,6 +305,7 @@
               .then((res) => {
                    
                     if(res.data.success){
+                      console.log(res.data.data);
                       this.data.unshift(res.data.data)
                       this.close()
                       this.errors = []
