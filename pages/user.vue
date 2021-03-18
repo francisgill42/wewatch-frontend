@@ -93,16 +93,19 @@
 
             <v-card-text>
               <v-container>
-                 <v-form
-                      ref="change_password_ref"
-                      lazy-validation
-                      >
-                     <v-text-field autocomplete="on" :rules="Rules" type="password" v-model="change_password" label="New Password"></v-text-field>
-                     <v-btn small class="primary" text @click="close">Cancel</v-btn>
-                     <v-btn small class="secondary" text @click="change_password_func">Save</v-btn>
-                
-              
-                    </v-form>
+                 <v-form ref="change_password_ref" lazy-validation>
+                  <v-text-field autocomplete="on" :rules="Rules" type="password" v-model="editedItem.password" label="New Password"></v-text-field>
+                  <!-- <v-text-field autocomplete="on" type="password" v-model="seperate_confirm_password" label="Confirm Password"></v-text-field>
+                  <div style="color:red;" v-if="errors.seperate_confirm_password">
+                    The confirm password and change password must match.
+                  </div> -->
+
+                   <v-text-field autocomplete="on" type="password" v-model="editedItem.confirm_password" label="Confirm Password"></v-text-field>
+                    <div style="color:red;" v-if="errors.confirm_password">{{errors.confirm_password[0]}}</div>
+                 
+                  <v-btn small class="primary" text @click="close">Cancel</v-btn>
+                  <v-btn small class="secondary" text @click="change_password_func">Save</v-btn>
+                </v-form>
               </v-container>
             </v-card-text>
 
@@ -188,6 +191,7 @@
       confirm_password: ""
       },
       change_password: "",
+      seperate_confirm_password: "",
       errors:[],
       Rules : [
           v => !!v || 'This field is required',
@@ -253,13 +257,20 @@
       change_password_func(){
         if(this.$refs.change_password_ref.validate()){
 
-          this.$axios.post('change_password/'+this.editedItem.id,{change_password:this.change_password})
+          this.$axios.post('change_password/'+this.editedItem.id,{
+              password:this.editedItem.password,
+              confirm_password:this.editedItem.confirm_password,
+              })
               .then((res) => {
                 if(res.data.success){
-                  this.close()
-                }
+                      this.close()
+                      this.errors = []
+                      }
+                      else{
+                        this.errors = res.data.errors
+                        }
 
-              });   
+              }).catch(err => console.log(this.errors = err.response.data.errors));
               }
       },
 
