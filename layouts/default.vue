@@ -56,6 +56,7 @@
       <!-- <v-toolbar-title v-text="title" /> -->
         <img src="https://wewatch.ae/wp-content/uploads/2020/03/logo-web.png" />
       <v-spacer />
+       <span class="secondary--text">{{Greetings}}</span> 
       <v-btn @click="logout" icon color="secondary">
         <v-icon>mdi-logout</v-icon>
       </v-btn>
@@ -128,6 +129,16 @@ export default {
           text:'Project Admin',
           to: '/project_admin',
          },
+          {
+          icon: 'mdi-chart-bubble',
+          text:'Client',
+          to: '/client'
+        },
+        {
+          icon: 'mdi-chart-bubble',
+          text:'Project',
+          to: '/project'
+        },
        
          {
           icon: 'mdi-chart-bubble',
@@ -145,16 +156,7 @@ export default {
           to: '/security_guard'
         },
 
-        {
-          icon: 'mdi-chart-bubble',
-          text:'Client',
-          to: '/client'
-        },
-        {
-          icon: 'mdi-chart-bubble',
-          text:'Project',
-          to: '/project'
-        },
+       
         {
           icon: 'mdi-chart-bubble',
           text:'Allocation',
@@ -220,6 +222,11 @@ export default {
     isSecurityGuard () {
       return this.$auth.user.user_type == "Security Guard";
     },
+
+    Greetings () {
+      return 'Welcome, ' + this.$auth.user.email;
+    },
+
     isUser () {
       return this.$auth.user.user_type == "User";
     },
