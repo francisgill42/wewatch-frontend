@@ -220,12 +220,17 @@ export default {
           text:'Dashboard',
           to: '/'
         },
-       
         {
-            icon: 'mdi-chart-bubble',
-            text:'Report',
-            to: '/reports'
-          },
+          icon: 'mdi-chart-bubble',
+          text:'Project',
+          to: '/project'
+        },
+       
+        // {
+        //     icon: 'mdi-chart-bubble',
+        //     text:'Report',
+        //     to: '/reports'
+        //   },
     ]
     }
     else{
