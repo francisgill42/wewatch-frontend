@@ -313,7 +313,7 @@ export default {
         value: 'project_logo',
       },
       {
-        text: 'Client',
+        text: 'Project Admin',
         sortable: true,
         value: 'user.name',
       },
@@ -396,7 +396,13 @@ export default {
   methods: {
     initialize () {
 
-      this.$axios.get('project').then(res => console.log(this.data = res.data));
+         var url = this.$auth.user && this.$auth.user.role.role == 'project Admin' 
+                  
+                  ? 'projectbyuserid/' + this.$auth.user.id
+                  
+                  : 'project';
+         
+         this.$axios.get(url).then(res => console.log(this.data = res.data));
 
       this.$axios.get(`get_users_by_id/2`).then(res => this.clients = res.data.data);
 

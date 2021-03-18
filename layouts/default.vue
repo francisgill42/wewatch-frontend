@@ -213,22 +213,43 @@ export default {
         },
     ]
     }
+    else if(this.isProjectAdmin){
+      this.items = [
+        {
+          icon: 'mdi-apps',
+          text:'Dashboard',
+          to: '/'
+        },
+       
+        {
+            icon: 'mdi-chart-bubble',
+            text:'Report',
+            to: '/reports'
+          },
+    ]
+    }
     else{
       this.items = AllMenu;
     }
 
   },
   computed : {
-    isSecurityGuard () {
-      return this.$auth.user.user_type == "Security Guard";
-    },
-
+  
     Greetings () {
       return 'Welcome, ' + this.$auth.user.email;
     },
 
+
+    isSecurityGuard () {
+      return this.$auth.user && this.$auth.user.user_type == "Security Guard";
+    },
+    
+    isProjectAdmin () {
+      return this.$auth.user && this.$auth.user.user_type == "project Admin";
+    },
+
     isUser () {
-      return this.$auth.user.user_type == "User";
+      return this.$auth.user && this.$auth.user.user_type == "User";
     },
   },
   methods:{
