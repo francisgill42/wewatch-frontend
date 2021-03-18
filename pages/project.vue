@@ -64,7 +64,7 @@
                       :items="clients" 
                       :rules="ClientRules"
                       required
-                    item-text="name" item-value="id" single-line auto label="Client">
+                    item-text="name" item-value="id" single-line auto label="Project Admin">
                 </v-autocomplete>
           <span style="font-size: 0.875rem; color: red; font-weight: 400;" v-if="errors.user_id" v-text="errors.user_id[0]"></span>                                                          
                     <!-- <v-text-field v-model="editedItem.project_logo" :label="`${entity} Logo`"></v-text-field>
@@ -398,7 +398,7 @@ export default {
 
       this.$axios.get('project').then(res => console.log(this.data = res.data));
 
-      this.$axios.get(`get_users_by_id/6`).then(res => this.clients = res.data.data);
+      this.$axios.get(`get_users_by_id/2`).then(res => this.clients = res.data.data);
 
     },
 
