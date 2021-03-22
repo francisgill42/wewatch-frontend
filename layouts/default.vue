@@ -54,7 +54,7 @@
         <v-icon>mdi-minus</v-icon>
       </v-btn> -->
       <!-- <v-toolbar-title v-text="title" /> -->
-        <img src="https://wewatch.ae/wp-content/uploads/2020/03/logo-web.png" />
+        <img src="/logo.png" alt="login" style="width:150px">
       <v-spacer />
        <span class="secondary--text">{{Greetings}}</span> 
       <v-btn @click="logout" icon color="secondary">

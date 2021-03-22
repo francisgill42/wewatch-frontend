@@ -282,11 +282,6 @@
       mdi-delete
     </v-icon>
   </template>
-
-    <template v-slot:item.open_dashboard="{ item }">
-      <v-btn small class="primary">Open Dashboard</v-btn>
-  </template>
-
   <template v-slot:no-data>
     <v-btn small color="primary" @click="initialize">Reset</v-btn>
   </template>
@@ -308,11 +303,6 @@ export default {
     headers: [
       
       {
-        text: 'Dashboard',
-        sortable: false,
-        value: 'open_dashboard',
-      },
-       {
         text: 'Project Name',
         sortable: false,
         value: 'project_name',
