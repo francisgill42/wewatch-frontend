@@ -1,8 +1,8 @@
 <template>
 <div>
-    <v-row>
+    <v-row v-if="isSuperAdmin">
 
-          <v-col  cols="12" sm="8" md="4" class="" v-for="(card,i) in cards" :key="i">
+          <v-col cols="12" sm="8" md="4" class="" v-for="(card,i) in cards" :key="i">
             <v-card :to="card.link" :class="card.color" class="pa-2">
             <v-list-item dark>
             <v-list-item-content>
@@ -13,20 +13,23 @@
             </v-card>
           </v-col>
 
-          <v-col md="12">
-            <Allocations />
-          </v-col>
+         
            
+  </v-row>
+
+  <v-row v-if="isProjectAdmin">
+    <v-col md="12"><Project /></v-col>
   </v-row>
 
 </div>
 </template>
 
 <script>
-import Allocations from '@/components/Allocations';
+import Project from '@/components/Project';
+
 export default {
 
-  components : { Allocations },
+  components : { Project },
 
   methods : {
     added_zero(v) { return v < 10 ? '0' + v : v }
@@ -51,8 +54,14 @@ export default {
           }
  }),
    async mounted () {
+
+
     this.loaded = false
     try {
+
+
+
+
       await this.$axios.get('all')
       .then(res => {
         
@@ -66,16 +75,23 @@ export default {
                     // {link : '/covid',text:'Lost Work Hours',count:res.data.GetLostWorkHoursCount,color:'brown lighten-1',chartColor : 'rgb(141 110 99)'},
 
         ];
-        // this.data.labels = this.cards.flatMap((v) => v.text )
-        // this.data.datasets[0].label = 'Reports'
-        // this.data.datasets[0].data = this.cards.flatMap((v) => v.count )
-        // this.data.datasets[0].backgroundColor = this.cards.flatMap((v) => v.chartColor )
+
       });
 
       this.loaded = true
     } catch (e) {
       console.error(e)
     }
+  },
+  computed : {
+    isSuperAdmin () {
+          return this.$auth.user && this.$auth.user.role.role == 'Super Admin'
+    },
+
+    isProjectAdmin () {
+          return this.$auth.user && this.$auth.user.role.role == 'project Admin'
+    },
+
   }
 }
 </script>

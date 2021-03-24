@@ -282,6 +282,11 @@
       mdi-delete
     </v-icon>
   </template>
+
+    <template v-slot:item.open_dashboard="{ item }">
+      <v-btn small class="primary" :to="`/project/${item.id}`">Open Dashboard</v-btn>
+  </template>
+
   <template v-slot:no-data>
     <v-btn small color="primary" @click="initialize">Reset</v-btn>
   </template>
@@ -303,6 +308,17 @@ export default {
     headers: [
       
       {
+        text: '#',
+        sortable: false,
+        value: 'id',
+      },
+       
+      {
+        text: 'Dashboard',
+        sortable: false,
+        value: 'open_dashboard',
+      },
+       {
         text: 'Project Name',
         sortable: false,
         value: 'project_name',
@@ -373,13 +389,20 @@ export default {
     ]
 
   }),
-
+ 
   computed: {
     isReadOnly(){
       return this.action == 'View'
     },
     formTitle () {
       return this.action ? this.action : this.editedIndex === -1 ? 'New' : 'Edit'
+    },
+    isSuperAdmin () {
+      return this.$auth.user && this.$auth.user.role.role == 'Super Admin'
+    },
+
+    isProjectAdmin () {
+      return this.$auth.user && this.$auth.user.role.role == 'project Admin'
     },
   },
 
@@ -396,16 +419,21 @@ export default {
   methods: {
     initialize () {
 
-         var url = this.$auth.user && this.$auth.user.role.role == 'project Admin' 
-                  
-                  ? 'projectbyuserid/' + this.$auth.user.id
-                  
-                  : 'project';
-         
-         this.$axios.get(url).then(res => console.log(this.data = res.data));
 
+         this.getProjects();
+
+         this.getClients();
+
+    },
+
+    getProjects() {
+          var url = this.isProjectAdmin ? 'projectbyuserid/' + this.$auth.user.id : 'project';
+
+          this.$axios.get(url).then(res => this.data = res.data);
+    },
+
+    getClients() {
       this.$axios.get(`get_users_by_id/2`).then(res => this.clients = res.data.data);
-
     },
 
 

@@ -48,15 +48,15 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    // baseURL : 'http://localhost:8000/api/' ,
-    baseURL : 'https://wewatch.ordd.tk/api/'
+        // baseURL : 'http://localhost:8000/api/',
+           baseURL : 'https://wewatch.ordd.tk/api/'
   },
   auth: {
 
     strategies: {
       local: {
         endpoints: {
-          login: { url: 'login', method: 'post', propertyName: 'token' },
+          login: { url: 'master/login', method: 'post', propertyName: 'token' },
           logout: false,
           user: { url: 'me', method: 'get', propertyName: 'user' }
         }

@@ -28,7 +28,6 @@
       </v-list>
     </v-navigation-drawer>
     <v-app-bar
-      
       class="white"
       :clipped-left="clipped"
       fixed
@@ -104,6 +103,7 @@ export default {
   data () {
     return {
       links : [],
+      hide : false,
       clipped: true,
       drawer: false,
       fixed: false,
@@ -220,11 +220,11 @@ export default {
           text:'Dashboard',
           to: '/'
         },
-        {
-          icon: 'mdi-chart-bubble',
-          text:'Project',
-          to: '/project'
-        },
+        // {
+        //   icon: 'mdi-chart-bubble',
+        //   text:'Project',
+        //   to: '/project'
+        // },
        
         // {
         //     icon: 'mdi-chart-bubble',
