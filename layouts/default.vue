@@ -54,7 +54,7 @@
         <v-icon>mdi-minus</v-icon>
       </v-btn> -->
       <!-- <v-toolbar-title v-text="title" /> -->
-        <img src="/logo.png" alt="login" style="width:150px">
+        <img src="/logo.png" alt="login" style="width:350px">
       <v-spacer />
        <span class="secondary--text">{{Greetings}}</span> 
       <v-btn @click="logout" icon color="secondary">

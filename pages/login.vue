@@ -13,7 +13,7 @@ X
 <v-card class="elevation-10 pa-3">
 <v-card-text>
 <div class="layout column align-center">
-<img src="/logo.png" alt="ssep login" style="width:70%">
+<img src="/logo.png" alt="ssep login" style="width:400px">
 <!-- <h1 class="flex my-2 secondary--text">SSEP LOGIN</h1> -->
 </div>
 <v-form>
