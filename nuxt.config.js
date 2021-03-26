@@ -4,6 +4,10 @@ export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
+  generate: {
+    fallback: true
+  },
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: 'wewatch',
@@ -26,9 +30,7 @@ export default {
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-    {src:'~/plugins/chart.js', mode: 'client'} 
-  ],
+  plugins: [ {src:'~/plugins/chart.js', mode: 'client'} ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -49,14 +51,14 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
         // baseURL : 'http://localhost:8000/api/',
-           baseURL : 'https://wewatch.ordd.tk/api/'
+      baseURL : 'https://wewatch.ordd.tk/api/'
   },
   auth: {
 
     strategies: {
       local: {
         endpoints: {
-          login: { url: 'master/login', method: 'post', propertyName: 'token' },
+          login: { url: 'login', method: 'post', propertyName: 'token' },
           logout: false,
           user: { url: 'me', method: 'get', propertyName: 'user' }
         }
