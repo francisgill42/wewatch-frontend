@@ -219,20 +219,25 @@ export default {
           icon: 'mdi-apps',
           text:'Dashboard',
           to: '/'
-        },
-        // {
-        //   icon: 'mdi-chart-bubble',
-        //   text:'Project',
-        //   to: '/project'
-        // },
-       
-        // {
-        //     icon: 'mdi-chart-bubble',
-        //     text:'Report',
-        //     to: '/reports'
-        //   },
+        }
     ]
     }
+    else if(this.isManager){
+      this.items = [
+        {
+          icon: 'mdi-apps',
+          text:'Dashboard',
+          to: '/'
+        },
+        {
+          icon: 'mdi-chart-bubble',
+          text:'Project',
+          to: '/project'
+        },
+      
+    ]
+    }
+
     else{
       this.items = AllMenu;
     }
@@ -256,6 +261,9 @@ export default {
     isUser () {
       return this.$auth.user && this.$auth.user.user_type == "User";
     },
+    isManager () {
+      return this.$auth.user && this.$auth.user.user_type == 'Wewatch Manager'
+    }
   },
   methods:{
      logout() {

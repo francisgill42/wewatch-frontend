@@ -17,7 +17,7 @@
            
   </v-row>
 
-  <v-row v-if="isProjectAdmin">
+  <v-row v-if="isProjectAdmin || isManager">
     <v-col md="12"><Project /></v-col>
   </v-row>
 
@@ -32,7 +32,7 @@ export default {
   components : { Project },
 
   methods : {
-    added_zero(v) { return v < 10 ? '0' + v : v }
+    added_zero(v) { return v < 10 ? '0' + v : v },
   },
  data : () => ({
     loaded : false,
@@ -55,12 +55,8 @@ export default {
  }),
    async mounted () {
 
-
     this.loaded = false
     try {
-
-
-
 
       await this.$axios.get('all')
       .then(res => {
@@ -85,12 +81,15 @@ export default {
   },
   computed : {
     isSuperAdmin () {
-          return this.$auth.user && this.$auth.user.role.role == 'Super Admin'
+          return this.$auth.user && this.$auth.user.user_type == 'Super Admin'
     },
 
     isProjectAdmin () {
-          return this.$auth.user && this.$auth.user.role.role == 'project Admin'
+          
     },
+    isManager () {
+      return this.$auth.user && this.$auth.user.user_type == 'Wewatch Manager'
+    }
 
   }
 }

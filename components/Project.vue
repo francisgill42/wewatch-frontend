@@ -398,12 +398,15 @@ export default {
       return this.action ? this.action : this.editedIndex === -1 ? 'New' : 'Edit'
     },
     isSuperAdmin () {
-      return this.$auth.user && this.$auth.user.role.role == 'Super Admin'
+      return this.$auth.user && this.$auth.user.user_type == 'Super Admin'
     },
 
     isProjectAdmin () {
-      return this.$auth.user && this.$auth.user.role.role == 'project Admin'
+      return this.$auth.user && this.$auth.user.user_type == 'project Admin'
     },
+    isManager () {
+      return this.$auth.user && this.$auth.user.user_type == 'Wewatch Manager'
+    }
   },
 
   watch: {
@@ -419,7 +422,6 @@ export default {
   methods: {
     initialize () {
 
-
          this.getProjects();
 
          this.getClients();
@@ -427,7 +429,20 @@ export default {
     },
 
     getProjects() {
-          var url = this.isProjectAdmin ? 'projectbyuserid/' + this.$auth.user.id : 'project';
+
+          var url  = '';
+          if(this.isManager){
+            url = 'projectbymanagerid/' + this.$auth.user.id;
+          }
+          else if (this.isProjectAdmin){
+            url = 'projectbyuserid/' + this.$auth.user.id;
+          }
+          else{
+            url = 'project';
+          }
+
+
+          // this.isManager
 
           this.$axios.get(url).then(res => this.data = res.data);
     },
